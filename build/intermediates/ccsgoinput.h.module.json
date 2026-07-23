@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "E:\\COMP6841_Project\\CS2_Simple_Hack\\\\build\\intermediates\\CCSGOInput.h.obj",
+            "outputs": [
+                "E:\\COMP6841_Project\\CS2_Simple_Hack\\build\\intermediates\\vc145.pdb",
+                "E:\\COMP6841_Project\\CS2_Simple_Hack\\\\build\\intermediates\\",
+                "E:\\COMP6841_Project\\CS2_Simple_Hack\\build\\intermediates\\CCSGOInput.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "src\\cs2\\classes\\CCSGOInput.h",
+                    "source-path": "e:\\comp6841_project\\cs2_simple_hack\\cs2_simple_hack\\src\\cs2\\classes\\ccsgoinput.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="CS2_Simple_Hack/CS2_Simple_Hack.vcxproj" Id="8d5d7377-18e4-45c6-890f-54c027032624" />
+</Solution>

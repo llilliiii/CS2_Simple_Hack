@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "E:\\COMP6841_Project\\CS2_Simple_Hack\\build\\intermediates\\microsoft\\STL\\std.obj",
+            "outputs": [
+                "E:\\COMP6841_Project\\CS2_Simple_Hack\\build\\intermediates\\microsoft\\STL\\std.ixx.ifc.dt.module.json",
+                "E:\\COMP6841_Project\\CS2_Simple_Hack\\build\\intermediates\\microsoft\\STL\\std.ixx.ifc.dt.d.json",
+                "E:\\COMP6841_Project\\CS2_Simple_Hack\\build\\intermediates\\microsoft\\STL\\std.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "std",
+                    "source-path": "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\modules\\std.ixx",
+                    "is-interface": true
+                }
+            ],
+            "requires": []
+        }
+    ]
+}
