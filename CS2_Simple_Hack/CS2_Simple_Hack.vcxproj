@@ -187,9 +187,31 @@
     <ClInclude Include="ext\minhook\src\trampoline.h" />
     <ClInclude Include="src\core\math\math.h" />
     <ClInclude Include="src\core\mem\mem.h" />
+    <ClInclude Include="src\cs2\classes\entity_scanner.h" />
     <ClInclude Include="src\cs2\hook\createmove.h" />
     <ClInclude Include="src\cs2\hook\hooks.h" />
     <ClInclude Include="src\cs2\hook\present.h" />
+    <ClInclude Include="src\cs2\output\animationsystem_dll.hpp" />
+    <ClInclude Include="src\cs2\output\buttons.hpp" />
+    <ClInclude Include="src\cs2\output\client_dll.hpp" />
+    <ClInclude Include="src\cs2\output\engine2_dll.hpp" />
+    <ClInclude Include="src\cs2\output\host_dll.hpp" />
+    <ClInclude Include="src\cs2\output\interfaces.hpp" />
+    <ClInclude Include="src\cs2\output\materialsystem2_dll.hpp" />
+    <ClInclude Include="src\cs2\output\networksystem_dll.hpp" />
+    <ClInclude Include="src\cs2\output\offsets.hpp" />
+    <ClInclude Include="src\cs2\output\panorama_dll.hpp" />
+    <ClInclude Include="src\cs2\output\particles_dll.hpp" />
+    <ClInclude Include="src\cs2\output\pulse_system_dll.hpp" />
+    <ClInclude Include="src\cs2\output\rendersystemdx11_dll.hpp" />
+    <ClInclude Include="src\cs2\output\resourcesystem_dll.hpp" />
+    <ClInclude Include="src\cs2\output\scenesystem_dll.hpp" />
+    <ClInclude Include="src\cs2\output\schemasystem_dll.hpp" />
+    <ClInclude Include="src\cs2\output\server_dll.hpp" />
+    <ClInclude Include="src\cs2\output\soundsystem_dll.hpp" />
+    <ClInclude Include="src\cs2\output\steamaudio_dll.hpp" />
+    <ClInclude Include="src\cs2\output\vphysics2_dll.hpp" />
+    <ClInclude Include="src\cs2\output\worldrenderer_dll.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ext\minhook\dll_resources\MinHook.def" />
