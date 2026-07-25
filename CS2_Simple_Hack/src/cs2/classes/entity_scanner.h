@@ -70,23 +70,21 @@ public:
 		return *reinterpret_cast<Vec3*>(entity + cs2_dumper::schemas::client_dll::C_BasePlayerPawn::m_vOldOrigin);
 	}
 	
-
-
-	uintptr_t getClosestEntity() {
-		uintptr_t closestEntity = 0;
-		float closestDistance = FLT_MAX;
-		for (int i = 0; i < MAX_ENTITY_SCAN; ++i) {
-			uintptr_t entity = getEntity(i);
-			if (entity == 0) {
-				continue; // Skip invalid entities
-			}
-			// Assuming you have a way to get the distance to the entity
-			float distance = getDistanceToEntity(entity);
-			if (distance < closestDistance) {
-				closestDistance = distance;
-				closestEntity = entity;
-			}
+	static Vec3 getEntityViewOffset(uintptr_t entity) {
+		if (!entity) {
+			return Vec3(); // Invalid entity
 		}
-		return closestEntity;
+		static_assert(sizeof(Vec3) == sizeof(float) * 3);
+		return *reinterpret_cast<Vec3*>(entity + cs2_dumper::schemas::client_dll::C_BaseModelEntity::m_vecViewOffset);
+	}
+
+	static QAngle_t getPunchAngle(uintptr_t entity) {
+		if (!entity) {
+			return QAngle_t(); // Invalid entity
+		}
+		static_assert(sizeof(QAngle_t) == sizeof(float) * 3);
+		QAngle_t predictablePunch = *reinterpret_cast<QAngle_t*>(entity + cs2_dumper::schemas::client_dll::CCSPlayer_AimPunchServices::m_predictableBaseAngle);
+		QAngle_t unpredictablePunch = *reinterpret_cast<QAngle_t*>(entity + cs2_dumper::schemas::client_dll::CCSPlayer_AimPunchServices::m_unpredictableBaseAngle);
+		return predictablePunch + unpredictablePunch;
 	}
 };

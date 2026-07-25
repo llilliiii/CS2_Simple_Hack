@@ -121,61 +121,99 @@ struct Vec3
 
 struct QAngle_t
 {
-    float pitch, yaw, roll;
+    float pitch;
+    float yaw;
+    float roll;
 
     constexpr QAngle_t()
-        : pitch(0.f), yaw(0.f), roll(0.f) {
+        : pitch(0.f), yaw(0.f), roll(0.f)
+    {
     }
 
     constexpr QAngle_t(float pitch, float yaw, float roll = 0.f)
-        : pitch(pitch), yaw(yaw), roll(roll) {
+        : pitch(pitch), yaw(yaw), roll(roll)
+    {
     }
 
-    constexpr QAngle_t operator+(const QAngle_t& rhs) const
+    static float NormalizeAngle(float angle)
     {
-        return
-        {
+        angle = std::fmod(angle, 360.0f);
+
+        if (angle <= -180.0f)
+            angle += 360.0f;
+
+        if (angle > 180.0f)
+            angle -= 360.0f;
+
+        return angle;
+    }
+
+    void Normalize()
+    {
+        pitch = NormalizeAngle(pitch);
+        yaw = NormalizeAngle(yaw);
+        roll = NormalizeAngle(roll);
+    }
+
+    [[nodiscard]]
+    QAngle_t Normalized() const
+    {
+        QAngle_t result = *this;
+        result.Normalize();
+        return result;
+    }
+
+    //-------------------------
+    // Arithmetic operators
+    //-------------------------
+
+    QAngle_t operator+(const QAngle_t& rhs) const
+    {
+        return QAngle_t(
             pitch + rhs.pitch,
             yaw + rhs.yaw,
             roll + rhs.roll
-        };
+        ).Normalized();
     }
 
-    constexpr QAngle_t operator-(const QAngle_t& rhs) const
+    QAngle_t operator-(const QAngle_t& rhs) const
     {
-        return
-        {
+        return QAngle_t(
             pitch - rhs.pitch,
             yaw - rhs.yaw,
             roll - rhs.roll
-        };
+        ).Normalized();
     }
 
-    constexpr QAngle_t operator*(float s) const
+    QAngle_t operator*(float scalar) const
     {
-        return
-        {
-            pitch * s,
-            yaw * s,
-            roll * s
-        };
+        return QAngle_t(
+            pitch * scalar,
+            yaw * scalar,
+            roll * scalar
+        ).Normalized();
     }
 
-    constexpr QAngle_t operator/(float s) const
+    QAngle_t operator/(float scalar) const
     {
-        return
-        {
-            pitch / s,
-            yaw / s,
-            roll / s
-        };
+        return QAngle_t(
+            pitch / scalar,
+            yaw / scalar,
+            roll / scalar
+        ).Normalized();
     }
+
+    //-------------------------
+    // Compound assignment
+    //-------------------------
 
     QAngle_t& operator+=(const QAngle_t& rhs)
     {
         pitch += rhs.pitch;
         yaw += rhs.yaw;
         roll += rhs.roll;
+
+        Normalize();
         return *this;
     }
 
@@ -184,22 +222,44 @@ struct QAngle_t
         pitch -= rhs.pitch;
         yaw -= rhs.yaw;
         roll -= rhs.roll;
+
+        Normalize();
         return *this;
     }
 
-    QAngle_t& operator*=(float s)
+    QAngle_t& operator*=(float scalar)
     {
-        pitch *= s;
-        yaw *= s;
-        roll *= s;
+        pitch *= scalar;
+        yaw *= scalar;
+        roll *= scalar;
+
+        Normalize();
         return *this;
     }
 
-    QAngle_t& operator/=(float s)
+    QAngle_t& operator/=(float scalar)
     {
-        pitch /= s;
-        yaw /= s;
-        roll /= s;
+        pitch /= scalar;
+        yaw /= scalar;
+        roll /= scalar;
+
+        Normalize();
         return *this;
+    }
+
+    //-------------------------
+    // Comparison
+    //-------------------------
+
+    bool operator==(const QAngle_t& rhs) const
+    {
+        return pitch == rhs.pitch &&
+            yaw == rhs.yaw &&
+            roll == rhs.roll;
+    }
+
+    bool operator!=(const QAngle_t& rhs) const
+    {
+        return !(*this == rhs);
     }
 };
