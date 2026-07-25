@@ -301,7 +301,8 @@
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\tuple",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\xpolymorphic_allocator.h",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\cctype",
-            "e:\\comp6841_project\\cs2_simple_hack\\cs2_simple_hack\\src\\core\\math\\math.h"
+            "e:\\comp6841_project\\cs2_simple_hack\\cs2_simple_hack\\src\\core\\math\\math.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\cmath"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

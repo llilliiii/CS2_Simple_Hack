@@ -9,48 +9,52 @@
 #define Controler_Offset 0x78
 
 class EntityScanner {
-	uint64_t clientDllBase;
-	uint64_t entityListPrt;
-	uint64_t listEntry;
+	uintptr_t clientDllBase;
+	uintptr_t entityListPrt;
+	uintptr_t listEntry;
 
 public:
 	EntityScanner() {
-		clientDllBase = reinterpret_cast<uint64_t>(GetModuleHandleA("client.dll"));
+		clientDllBase = reinterpret_cast<uintptr_t>(GetModuleHandleA("client.dll"));
 		entityListPrt = clientDllBase + cs2_dumper::offsets::client_dll::dwEntityList;
 		listEntry = entityListPrt + List_Entry_Offset;
 	}
 
-	uint64_t getEntity(int index) {
+	uintptr_t getEntity(int index) {
 		if (index < 0 || index >= MAX_ENTITY_SCAN) {
 			return 0; // Invalid index
 		}
-		auto entityController = *reinterpret_cast<uint64_t*>(listEntry + index * Controler_Offset);
+		auto entityController = *reinterpret_cast<uintptr_t*>(listEntry + index * Controler_Offset);
 		
 		if (!entityController) {
 			return 0; // Invalid controller
 		}
 
-		auto entityPawnHandle = *reinterpret_cast<uint64_t*>(entityController + cs2_dumper::schemas::client_dll::CCSPlayerController::m_hPlayerPawn);
+		auto entityPawnHandle = *reinterpret_cast<uintptr_t*>(entityController + cs2_dumper::schemas::client_dll::CCSPlayerController::m_hPlayerPawn);
 
 		if (!entityPawnHandle) {
 			return 0; // Invalid pawn handle
 		}
 		
-		auto listEntry2 = *reinterpret_cast<uint64_t*>(entityListPrt + 0x8 * ((entityPawnHandle & 0x7FFF) >> 9) + 0x10);
-	
-		auto entity = *reinterpret_cast<uint64_t*>(listEntry2 + 0x78 * (entityPawnHandle & 0x1FF));
+		auto listEntry2 = *reinterpret_cast<uintptr_t*>(entityListPrt + 0x8 * ((entityPawnHandle & 0x7FFF) >> 9) + List_Entry_Offset);
+		
+		if (!listEntry2) {
+			return 0; // Invalid list entry2
+		}
+
+		auto entity = *reinterpret_cast<uintptr_t*>(listEntry2 + 0x78 * (entityPawnHandle & 0x1FF));
 
 		return entity;
 	}
 
-	int8_t getEntityTeam(uint64_t entity) {
+	int8_t getEntityTeam(uintptr_t entity) {
 		if (!entity) {
 			return -1; // Invalid entity
 		}
 		return *reinterpret_cast<int8_t*>(entity + cs2_dumper::schemas::client_dll::C_BaseEntity::m_iTeamNum);
 	}
 
-	int8_t isEntityAlive(uint64_t entity) {
+	int8_t getEntityLifeState(uintptr_t entity) {
 		if (!entity) {
 			return -1; // Invalid entity
 		}
@@ -58,7 +62,7 @@ public:
 	}
 
 
-	static Vec3 getEntityPosition(uint64_t entity) {
+	static Vec3 getEntityPosition(uintptr_t entity) {
 		if (!entity) {
 			return Vec3(); // Invalid entity
 		}
@@ -68,11 +72,11 @@ public:
 	
 
 
-	uint64_t getClosestEntity() {
-		uint64_t closestEntity = 0;
+	uintptr_t getClosestEntity() {
+		uintptr_t closestEntity = 0;
 		float closestDistance = FLT_MAX;
 		for (int i = 0; i < MAX_ENTITY_SCAN; ++i) {
-			uint64_t entity = getEntity(i);
+			uintptr_t entity = getEntity(i);
 			if (entity == 0) {
 				continue; // Skip invalid entities
 			}
