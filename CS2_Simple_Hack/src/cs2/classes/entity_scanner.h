@@ -42,7 +42,6 @@ public:
 		}
 
 		auto entityPawnHandle = *reinterpret_cast<uintptr_t*>(entityController + cs2_dumper::schemas::client_dll::CCSPlayerController::m_hPlayerPawn);
-		//auto entityPawnHandle = *(uint64_t*)(entityController + cs2_dumper::schemas::client_dll::CCSPlayerController::m_hPlayerPawn);
 		if (!entityPawnHandle) {
 			return 0; // Invalid pawn handle
 		}
@@ -80,6 +79,21 @@ public:
 		return *reinterpret_cast<int8_t*>(entity + cs2_dumper::schemas::client_dll::C_BaseEntity::m_lifeState);
 	}
 
+	bool getEntitySpottedState(uintptr_t entity) {
+		if (!entity) {
+			return false; // Invalid entity
+		}
+		return *reinterpret_cast<bool*>(entity + cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_entitySpottedState + cs2_dumper::schemas::client_dll::EntitySpottedState_t::m_bSpotted);
+	}
+
+	Vec3 getEntityVelocity(uintptr_t entity) {
+		if (!entity) {
+			return Vec3(); // Invalid entity
+		}
+		static_assert(sizeof(Vec3) == sizeof(float) * 3);
+		return *reinterpret_cast<Vec3*>(entity + cs2_dumper::schemas::client_dll::C_BaseEntity::m_vecBaseVelocity);
+	}
+
 	static Vec3 getEntityPosition(uintptr_t entity) {
 		if (!entity) {
 			return Vec3(); // Invalid entity
@@ -99,58 +113,5 @@ public:
 	QAngle_t getLocalViewAngles() {
 		static_assert(sizeof(QAngle_t) == sizeof(float) * 3);
 		return *reinterpret_cast<QAngle_t*>(clientDllBase + cs2_dumper::offsets::client_dll::dwViewAngles);
-	}
-
-	uintptr_t getClosestEnemy(uintptr_t localPlayer, int8_t localTeam, EntityScanner& scan) {
-		uintptr_t closestEntity = 0;
-		float closestDistance = FLT_MAX;
-		int8_t entityTeam;
-		int8_t entityLifeState;
-		uintptr_t entity;
-		Vec3 localPos;
-		Vec3 targetPos;
-
-		for (int i = 0; i < MAX_ENTITY_SCAN; ++i) {
-			entity = scan.getEntity(i);
-
-			// Check if the entity is valid and not the local player
-			if (!entity || entity == localPlayer)
-				continue;
-
-			// Check if the entity is on the same team
-			entityTeam = scan.getEntityTeam(entity);
-			//std::string msg = std::format("Team = {}\n",entityTeam);
-			//OutputDebugStringA(msg.c_str());
-			if (entityTeam == localTeam)
-				continue;
-			
-			// Check if the entity is alive
-			entityLifeState = scan.getEntityLifeState(entity);
-			if (entityLifeState)
-				continue;
-
-			// Calculate the distance between the local player and the entity
-			localPos = getEntityPosition(localPlayer);
-			targetPos = getEntityPosition(entity);
-			float distance = (localPos - targetPos).Length();
-
-			// Update the closest entity if this one is closer
-			if (distance < closestDistance) {
-				closestDistance = distance;
-				closestEntity = entity;
-			}
-		}
-
-		return closestEntity;
-	}
-
-	static QAngle_t getPunchAngle(uintptr_t entity) {
-		if (!entity) {
-			return QAngle_t(); // Invalid entity
-		}
-		static_assert(sizeof(QAngle_t) == sizeof(float) * 3);
-		QAngle_t predictablePunch = *reinterpret_cast<QAngle_t*>(entity + cs2_dumper::schemas::client_dll::CCSPlayer_AimPunchServices::m_predictableBaseAngle);
-		QAngle_t unpredictablePunch = *reinterpret_cast<QAngle_t*>(entity + cs2_dumper::schemas::client_dll::CCSPlayer_AimPunchServices::m_unpredictableBaseAngle);
-		return predictablePunch + unpredictablePunch;
 	}
 };

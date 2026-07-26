@@ -1,4 +1,5 @@
 #include "present.h"
+#include "cs2/settings.h"
 
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_dx11.h"
@@ -63,7 +64,24 @@ HRESULT hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags)
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
-	ImGui::ShowDemoWindow();
+	if (Settings::menuVisible)
+	{
+		ImGui::Begin("Debug Menu", &Settings::menuVisible);
+
+		ImGui::Checkbox(
+			"Enable Aimbot",
+			&Settings::AimbotEnabled
+		);
+
+		ImGui::Text(
+			"Status: %s",
+			Settings::AimbotEnabled
+			? "Enabled"
+			: "Disabled"
+		);
+
+		ImGui::End();
+	}
 
 	ImGui::Render();
 	pContext->OMSetRenderTargets(1, &mainRenderTargetView, NULL);

@@ -215,6 +215,7 @@
     <ClInclude Include="src\cs2\output\steamaudio_dll.hpp" />
     <ClInclude Include="src\cs2\output\vphysics2_dll.hpp" />
     <ClInclude Include="src\cs2\output\worldrenderer_dll.hpp" />
+    <ClInclude Include="src\cs2\settings.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ext\minhook\dll_resources\MinHook.def" />

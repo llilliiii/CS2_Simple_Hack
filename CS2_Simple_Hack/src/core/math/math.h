@@ -162,6 +162,23 @@ struct QAngle_t
         return result;
     }
 
+    [[nodiscard]]
+    float LengthSquared() const
+    {
+        return
+            pitch * pitch +
+            yaw * yaw +
+            roll * roll;
+    }
+
+    [[nodiscard]]
+    float Length2DSquared() const
+    {
+        return
+            pitch * pitch +
+            yaw * yaw;
+    }
+
     //-------------------------
     // Arithmetic operators
     //-------------------------
