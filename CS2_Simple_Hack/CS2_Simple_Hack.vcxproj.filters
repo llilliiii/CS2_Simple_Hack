@@ -72,6 +72,12 @@
     <ClCompile Include="ext\minhook\src\trampoline.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\cs2\cheat\cheat.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cs2\cheat\cheat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\math\math.h">
@@ -201,6 +207,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\cs2\output\worldrenderer_dll.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\cs2\debug\debug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,10 +1,11 @@
 #include <Windows.h>
 #include <thread>
 
+#include "cs2/debug/debug.h"
 #include "cs2/hook/hooks.h"
 
 DWORD WINAPI Hack_Thread(LPVOID lpParam)
-{
+{   
 	hook::Init(); // Initialize the hook
 
 	while (!GetAsyncKeyState(VK_DELETE)) // Check if the END key is pressed

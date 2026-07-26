@@ -18,7 +18,7 @@ bool hook::Init() {
 	if (!SetupCreateMoveHook()) {
 		return false;
 	}
-	
+
 	MH_EnableHook(MH_ALL_HOOKS);
 
 	return true;

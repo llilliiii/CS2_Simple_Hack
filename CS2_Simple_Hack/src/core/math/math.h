@@ -1,4 +1,5 @@
 #pragma once
+#include <cmath>
 
 struct Vec2
 {
@@ -6,8 +7,6 @@ struct Vec2
 
 	Vec2(float x = 0.0f, float y = 0.0f) : x(x), y(y) {}
 };
-
-#include <cmath>
 
 struct Vec3
 {

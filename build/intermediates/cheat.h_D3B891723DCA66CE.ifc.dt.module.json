@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "E:\\COMP6841_Project\\CS2_Simple_Hack\\build\\intermediates\\cheat.obj",
+            "outputs": [
+                "E:\\COMP6841_Project\\CS2_Simple_Hack\\build\\intermediates\\cheat.h_D3B891723DCA66CE.ifc.dt.module.json",
+                "E:\\COMP6841_Project\\CS2_Simple_Hack\\build\\intermediates\\cheat.h_D3B891723DCA66CE.ifc.dt.d.json",
+                "E:\\COMP6841_Project\\CS2_Simple_Hack\\build\\intermediates\\cheat.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "E:\\COMP6841_Project\\CS2_Simple_Hack\\CS2_Simple_Hack\\src\\cs2\\cheat\\cheat.h",
+                    "source-path": "e:\\comp6841_project\\cs2_simple_hack\\cs2_simple_hack\\src\\cs2\\cheat\\cheat.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

@@ -12,7 +12,9 @@ E:\COMP6841_Project\CS2_Simple_Hack\CS2_Simple_Hack\ext\minhook\src\hook.c;E:\CO
 E:\COMP6841_Project\CS2_Simple_Hack\CS2_Simple_Hack\ext\minhook\src\trampoline.c;E:\COMP6841_Project\CS2_Simple_Hack\build\intermediates\trampoline.obj
 E:\COMP6841_Project\CS2_Simple_Hack\CS2_Simple_Hack\src\core\math\math.cpp;E:\COMP6841_Project\CS2_Simple_Hack\build\intermediates\math.obj
 E:\COMP6841_Project\CS2_Simple_Hack\CS2_Simple_Hack\src\core\mem\mem.cpp;E:\COMP6841_Project\CS2_Simple_Hack\build\intermediates\mem.obj
+E:\COMP6841_Project\CS2_Simple_Hack\CS2_Simple_Hack\src\cs2\cheat\cheat.cpp;E:\COMP6841_Project\CS2_Simple_Hack\build\intermediates\cheat.obj
 E:\COMP6841_Project\CS2_Simple_Hack\CS2_Simple_Hack\src\cs2\classes\CCSGOInput.h;E:\COMP6841_Project\CS2_Simple_Hack\build\intermediates\CCSGOInput.h.obj
+E:\COMP6841_Project\CS2_Simple_Hack\CS2_Simple_Hack\src\cs2\cheat\cheat.h;E:\COMP6841_Project\CS2_Simple_Hack\build\intermediates\cheat.h.obj
 E:\COMP6841_Project\CS2_Simple_Hack\CS2_Simple_Hack\src\cs2\hook\createmove.cpp;E:\COMP6841_Project\CS2_Simple_Hack\build\intermediates\createmove.obj
 E:\COMP6841_Project\CS2_Simple_Hack\CS2_Simple_Hack\src\cs2\hook\hooks.cpp;E:\COMP6841_Project\CS2_Simple_Hack\build\intermediates\hooks.obj
 E:\COMP6841_Project\CS2_Simple_Hack\CS2_Simple_Hack\src\cs2\hook\present.cpp;E:\COMP6841_Project\CS2_Simple_Hack\build\intermediates\present.obj
