@@ -5,6 +5,7 @@
 #include "imgui/imgui_impl_dx11.h"
 #include "imgui/imgui_impl_win32.h"
 
+// Initialise the variables
 PresentFn oPresent = nullptr;
 
 bool init = false;
@@ -16,6 +17,7 @@ ID3D11Device* pDevice = nullptr;
 ID3D11DeviceContext* pContext = nullptr;
 ID3D11RenderTargetView* mainRenderTargetView = nullptr;
 
+// Function prototype
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 LRESULT __stdcall WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -32,6 +34,7 @@ void InitImGui() {
 	ImGui_ImplDX11_Init(pDevice, pContext);
 }
 
+// The hook function for present
 HRESULT initHkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags)
 {
 	if (!init) {
@@ -47,10 +50,6 @@ HRESULT initHkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags)
 			oWndProc = (WNDPROC)SetWindowLongPtr(window, GWLP_WNDPROC, (LONG_PTR)WndProc);
 			InitImGui();
 			init = true;
-		}
-		else
-		{
-			return oPresent(pSwapChain, SyncInterval, Flags);
 		}
 	}
 	return S_OK;
@@ -76,6 +75,18 @@ HRESULT hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags)
 		ImGui::Text(
 			"Status: %s",
 			Settings::AimbotEnabled
+			? "Enabled"
+			: "Disabled"
+		);
+
+		ImGui::Checkbox(
+			"Enable Hiding",
+			&Settings::Hiding
+		);
+
+		ImGui::Text(
+			"Status: %s",
+			Settings::Hiding
 			? "Enabled"
 			: "Disabled"
 		);

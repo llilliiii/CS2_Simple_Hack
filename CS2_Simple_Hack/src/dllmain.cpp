@@ -1,9 +1,9 @@
 #include <Windows.h>
 #include <thread>
 
-#include "cs2/debug/debug.h"
 #include "cs2/hook/hooks.h"
 
+// The Cheat thread
 DWORD WINAPI Hack_Thread(LPVOID lpParam)
 {   
 	hook::Init(); // Initialize the hook
@@ -19,6 +19,7 @@ DWORD WINAPI Hack_Thread(LPVOID lpParam)
 	return 0;
 }
 
+// The Main thread
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
 	switch (ul_reason_for_call)

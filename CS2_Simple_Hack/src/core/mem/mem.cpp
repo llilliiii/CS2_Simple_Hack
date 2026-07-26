@@ -4,6 +4,7 @@
 #include <Psapi.h>
 #include <vector>
 
+// Convert string pattern to bytes
 std::vector<std::pair<uint8_t, bool>> PatternToBytes(const std::string& pattern) {
     std::vector<std::pair<uint8_t, bool>> patternBytes;
     const char* start = pattern.c_str();
@@ -24,6 +25,7 @@ std::vector<std::pair<uint8_t, bool>> PatternToBytes(const std::string& pattern)
     return patternBytes;
 }
 
+// Looking into the memory, and check whether or not their is a matching
 uintptr_t Mem::PatternScan(const std::string& pattern, const std::string& modStr) {
     if (modStr.empty())
         return 0;

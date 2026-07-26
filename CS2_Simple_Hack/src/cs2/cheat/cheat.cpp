@@ -1,6 +1,9 @@
 #include "cheat.h"
 #include "core/math/math.h"
+#include "cs2/settings.h"
+#include <format>
 
+// Calculate the aiming angle
 QAngle_t CalculateAngle(const Vec3& source, const Vec3& destination) {
 	Vec3 delta = destination - source;
 	float hypotenuse = std::sqrt(delta.x * delta.x + delta.y * delta.y);
@@ -11,6 +14,7 @@ QAngle_t CalculateAngle(const Vec3& source, const Vec3& destination) {
 	return angles;
 }
 
+// Return the pointer of the closeset enemy
 uintptr_t getClosestEnemy(uintptr_t localPlayer, EntityScanner& scan) {
 	uintptr_t closestEntity = 0;
 	float closestAngle = FLT_MAX;
@@ -37,13 +41,20 @@ uintptr_t getClosestEnemy(uintptr_t localPlayer, EntityScanner& scan) {
 		if (entityLifeState != 0)
 			continue;
 
-		// Check if the entity is on the same team and not spotted
+		// Check if the entity is on the same team or not spotted
 		entityTeam = scan.getEntityTeam(entity);
 		spotted = scan.getEntitySpottedState(entity);
-		//std::string msg = std::format("Team = {}\n",entityTeam);
-		//OutputDebugStringA(msg.c_str());
-		if (entityTeam == localTeam && !spotted)
-			continue;
+		
+		if (Settings::Hiding == true) {
+			if (!spotted) {
+				continue;
+			}
+		}
+		else {
+			if (entityTeam == localTeam) {
+				continue;
+			}
+		}
 
 		// Calculate the angle diff between the local player view angle and the angle of the entity
 		localPos = scan.getEntityPosition(localPlayer);
@@ -62,27 +73,32 @@ uintptr_t getClosestEnemy(uintptr_t localPlayer, EntityScanner& scan) {
 	return closestEntity;
 }
 
+// Aimbot
 QAngle_t Cheat::Aimbot(EntityScanner& scan) {
 	// Get the local player entity
 	uintptr_t localPlayer = scan.getLocalPlayer();
+
+	// Invalid local player
 	if (!localPlayer)
 		return QAngle_t(360.0f, 0.0f, 0.0f);
 
 	uintptr_t closestEnemy = getClosestEnemy(localPlayer, scan);
 
+	// No closest enemy
 	if (closestEnemy == 0)
 		return QAngle_t(360.0f, 0.0f, 0.0f);
 
+	// Calculate the head position
 	Vec3 localPlayerHeadPos = scan.getEntityPosition(localPlayer) + scan.getEntityViewOffset(localPlayer);
 	Vec3 closestEnemyPos = scan.getEntityPosition(closestEnemy) + scan.getEntityViewOffset(closestEnemy);
-	Vec3 closestEnemyVelocity = scan.getEntityVelocity(closestEnemy);
-	closestEnemyPos = closestEnemyPos + closestEnemyVelocity * 0.8; // Adjust for closest enemy velocity	
-	//LogPosition(localPlayerHeadPos);
-	//LogPosition(closestEnemyPos);
 
+	// Adjust for closest enemy velocity
+	Vec3 closestEnemyVelocity = scan.getEntityVelocity(closestEnemy);
+	closestEnemyPos = closestEnemyPos + Vec3(closestEnemyVelocity.x * 0.01, closestEnemyVelocity.y * 0.01, closestEnemyVelocity.z * 0.01);
+
+	// Calculate the aim angle
 	QAngle_t aimAngles = CalculateAngle(localPlayerHeadPos, closestEnemyPos);
 	aimAngles.Normalize();
 
-	//OutputDebugStringA("Returned from Aimbot\n");
 	return aimAngles;
 }

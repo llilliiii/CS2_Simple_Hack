@@ -160,7 +160,6 @@
     <ClCompile Include="ext\minhook\src\hde\hde64.c" />
     <ClCompile Include="ext\minhook\src\hook.c" />
     <ClCompile Include="ext\minhook\src\trampoline.c" />
-    <ClCompile Include="src\core\math\math.cpp" />
     <ClCompile Include="src\core\mem\mem.cpp" />
     <ClCompile Include="src\cs2\cheat\cheat.cpp" />
     <ClCompile Include="src\cs2\classes\CCSGOInput.h" />
@@ -190,7 +189,6 @@
     <ClInclude Include="src\core\math\math.h" />
     <ClInclude Include="src\core\mem\mem.h" />
     <ClInclude Include="src\cs2\classes\entity_scanner.h" />
-    <ClInclude Include="src\cs2\debug\debug.h" />
     <ClInclude Include="src\cs2\hook\createmove.h" />
     <ClInclude Include="src\cs2\hook\hooks.h" />
     <ClInclude Include="src\cs2\hook\present.h" />

@@ -20,31 +20,33 @@ struct Vec3
         : x(x), y(y), z(z) {
     }
 
-    // Addition
+
+    //-------------------------
+    // Arithmetic operators
+    //-------------------------
     constexpr Vec3 operator+(const Vec3& rhs) const
     {
         return { x + rhs.x, y + rhs.y, z + rhs.z };
     }
 
-    // Subtraction
     constexpr Vec3 operator-(const Vec3& rhs) const
     {
         return { x - rhs.x, y - rhs.y, z - rhs.z };
     }
 
-    // Scalar multiplication
     constexpr Vec3 operator*(float s) const
     {
         return { x * s, y * s, z * s };
     }
 
-    // Scalar division
     constexpr Vec3 operator/(float s) const
     {
         return { x / s, y / s, z / s };
     }
 
-    // +=
+    //-------------------------
+    // Compound assignment
+    //-------------------------
     Vec3& operator+=(const Vec3& rhs)
     {
         x += rhs.x;
@@ -53,7 +55,6 @@ struct Vec3
         return *this;
     }
 
-    // -=
     Vec3& operator-=(const Vec3& rhs)
     {
         x -= rhs.x;
@@ -62,7 +63,6 @@ struct Vec3
         return *this;
     }
 
-    // *=
     Vec3& operator*=(float s)
     {
         x *= s;
@@ -71,7 +71,6 @@ struct Vec3
         return *this;
     }
 
-    // /=
     Vec3& operator/=(float s)
     {
         x /= s;
