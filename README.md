@@ -10,10 +10,10 @@ clone this repo, run the cs2-dumper.exe, and rebuild the solution
 # Reference
 [Inspiration & Guide & Source Code](https://github.com/pain1929/cs2SilentAim/tree/master)
 
-[Source Code](https://github.com/a2x/cs2-dumper)
+[cs2-dumper](https://github.com/a2x/cs2-dumper)
 
-[Source Code](https://github.com/ocornut/imgui)
+[imgui](https://github.com/ocornut/imgui)
 
-[Source Code](https://github.com/tsudakageyu/minhook)
+[minhook](https://github.com/tsudakageyu/minhook)
 
 [Guide](https://www.youtube.com/watch?v=EaYJCCOW6vw&t=1414s)
